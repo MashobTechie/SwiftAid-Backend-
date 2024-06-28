@@ -1,7 +1,9 @@
 const express = require("express")
 const morgan = require ("morgan")
 const cors = require("cors")
-const authRoute = require("./routes/authRoute")
+const errorHandler = require ("./midddlewares/error")
+const authRoutes = require("./routes/authRoute")
+
 const app = express();
 
 app.use(express.json());
@@ -16,6 +18,9 @@ app.get("/api/v1", (req, res) => {
     });
   });
 
+
+  app.use('/api/v1/auth', authRoutes);
+
   app.all("*", (req, res) => {
     res.status(404).json({
       status: "fail",
@@ -23,4 +28,6 @@ app.get("/api/v1", (req, res) => {
     });
   });
 
+  // Calling our error handler
+app.use(errorHandler);
   module.exports = app;
