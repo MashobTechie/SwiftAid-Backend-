@@ -1,0 +1,26 @@
+const express = require("express")
+const morgan = require ("morgan")
+const cors = require("cors")
+const authRoute = require("./routes/authRoute")
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+app.use(cors("*"));
+
+app.get("/", (req, res) => {
+    res.status(200).json({
+      status: "success",
+      message: "Welcome to SwiftAid",
+    });
+  });
+
+  app.all("*", (req, res) => {
+    res.status(404).json({
+      status: "fail",
+      message: `Can't find ${req.originalUrl} with method ${req.method} on this server. Route not defined`,
+    });
+  });
+
+  module.exports = app;
