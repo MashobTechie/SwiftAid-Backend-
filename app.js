@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.use(cors("*"));
 
-app.get("/", (req, res) => {
+app.get("/api/v1", (req, res) => {
     res.status(200).json({
       status: "success",
       message: "Welcome to SwiftAid",
