@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const { token } = require("morgan");
 
 const userSchema = new mongoose.Schema({
   firstname: {
@@ -29,7 +30,7 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "responder"],
     default: "user",
   },
-  verification_token: String,
+ verification_token: String,
   email_verified: {
     type: Boolean,
     default: false,
